@@ -9,6 +9,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: deploy to itch.io (HTML5)
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
