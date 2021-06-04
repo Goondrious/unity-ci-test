@@ -35,21 +35,30 @@ jobs:
         uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with: # https://game.ci/docs/github/builder#configuration-options
+        # https://game.ci/docs/github/builder#configuration-options
+        with: 
           targetPlatform: WebGL
 
       # Output
       - uses: actions/upload-artifact@v2
         id: unity-build
         with:
-          name: Build
+          name: this_build # TODO use versioning?
           path: build
+  # publish:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Download build
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: this_build
       # - name: deploy to itch.io (HTML5)
       #   uses: josephbmanley/butler-publish-itchio-action@master
       #   env:
       #     BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
       #     CHANNEL: html
-      #     ITCH_GAME: corg-e
-      #     ITCH_USER: bitbrain
+      #     ITCH_GAME: CI Test
+      #     ITCH_USER: goondrious
       #     PACKAGE: corge-html.zip
       #     VERSION: ${{ steps.unity_build.outputs.version }}
