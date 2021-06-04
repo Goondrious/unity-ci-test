@@ -44,7 +44,7 @@ jobs:
         id: unity-build
         with:
           name: this_build # TODO use versioning?
-          path: build
+          path: build/WebGL/WebGL
   # publish:
   #   needs: build
   #   runs-on: ubuntu-latest
@@ -60,5 +60,5 @@ jobs:
       #     CHANNEL: html
       #     ITCH_GAME: CI Test
       #     ITCH_USER: goondrious
-      #     PACKAGE: corge-html.zip
+      #     PACKAGE: this_build
       #     VERSION: ${{ steps.unity_build.outputs.version }}

@@ -12,4 +12,8 @@
 	4. Upload license file to https://license.unity3d.com/
 	5. Copy contents of file as a github secret (i.e. `UNITY_LICENSE`)
 2. Configure desired triggers, file naming conventions, Itch configuration and for `./github/.workflows/build-and-publish.yml`
-3. Add `BUTLER_CREDENTIALS` github secret
+3. Generate Butler API key (https://itch.io/docs/butler/login.html#running-butler-from-ci-builds-travis-ci-gitlab-ci-etc)
+  1. Install Butler
+  2. run `butler login`
+  3. copy api key
+4. Add Butler API key as `BUTLER_CREDENTIALS` github secret

@@ -1,0 +1,20 @@
+# https://game.ci/docs/github/builder
+name: Test publishing local file to Itch
+
+on:
+  push:
+    branch:
+      - main
+jobs:  
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy to itch.io (HTML5)
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: html
+          ITCH_GAME: ci-test
+          ITCH_USER: goondrious
+          PACKAGE: build_test.zip
+          # VERSION: ${{ steps.unity_build.outputs.version }}
