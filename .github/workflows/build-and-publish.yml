@@ -45,20 +45,26 @@ jobs:
         with:
           name: this_build # TODO use versioning?
           path: build/WebGL/WebGL
-  # publish:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Download build
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: this_build
-      # - name: deploy to itch.io (HTML5)
-      #   uses: josephbmanley/butler-publish-itchio-action@master
-      #   env:
-      #     BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-      #     CHANNEL: html
-      #     ITCH_GAME: CI Test
-      #     ITCH_USER: goondrious
-      #     PACKAGE: this_build
-      #     VERSION: ${{ steps.unity_build.outputs.version }}
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build
+        uses: actions/download-artifact@v2
+        with:
+          name: this_build
+          path: this_build
+      - name: Zip build
+        uses: thedoctor0/zip-release@master
+        with:
+          path: ./this_build
+          filename: 'this_build.zip'
+      - name: deploy to itch.io (HTML5)
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: html
+          ITCH_GAME: ci-test
+          ITCH_USER: goondrious
+          PACKAGE: this_build.zip
+          # VERSION: ${{ steps.unity_build.outputs.version }}

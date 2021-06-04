@@ -2,9 +2,7 @@
 name: Test publishing local file to Itch
 
 on:
-  push:
-    branch:
-      - main
+  workflow_dispatch: {}
 jobs:  
   publish:
     runs-on: ubuntu-latest
